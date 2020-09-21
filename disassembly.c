@@ -42,7 +42,5 @@ int main()
 			printf("||");
 		}
 	}
-	
-	printf("%c",69);
 	return 0;
 }
