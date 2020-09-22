@@ -11,7 +11,6 @@ int length, above288=1,startloc=0,endloc=0,dataloc=0;
 scanf("%s",&data); //gets data from checksum
 length=strlen(data);
 
-printf("length: %i\n",length);
 while(above288){ //loops until length is less than 290
     if(length>290){ //compares 290 to account for 2 delimiter characters
             memset(copystr,0,sizeof(copystr)); //resets copystr
