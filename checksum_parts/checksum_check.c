@@ -4,20 +4,26 @@
 #include "bit.h"
 
 
-//LRC Implementation
+//LRC Verification
 int global_terminate_check = 0;
+
+
 bit_t *checksum_check(int size){
 	bit_t *sum = malloc(sizeof(bit_t) * size);
 	bit_t *prev_group = malloc(sizeof(bit_t) * size);
+	bit_t *curr_group = malloc(sizeof(bit_t) * size);
 	int j;
 	int exit_trigger = 0;
+	int entry_trigger = 1;
 	for (j = 0; j != size; ++j) sum[j] = 0;
 	for (j = 0; j != size; ++j) prev_group[j] = 0;
+	for (j = 0; j != size; ++j) curr_group[j] = 0;
 	while(1){
 	 
 		int i;
 		int delimit_counter = 0;
 		for (i = 0; i != size; ++i){
+			prev_group[i] = curr_group[i];
 			bit_t curr_bit = get_bit();
 			if (curr_bit == DELIMIT){
 				delimit_counter++;
@@ -31,16 +37,21 @@ bit_t *checksum_check(int size){
 				break;
 			}	
 			else {
-				prev_group[i] = curr_bit;
+				curr_group[i] = curr_bit;
 				sum[i] ^= curr_bit;
 			}
 		}
 		
-		if (!exit_trigger)
-			for (i = 0; i != size; ++i)
-				printf("%d", prev_group[i]);
+		int j;
+		if (entry_trigger){
+			entry_trigger = 0;
+			continue;
+		}
+		else if (!exit_trigger)
+			for (j = 0; j != size; ++j)
+				printf("%d", prev_group[j]);
 		else break;
-		
+
 	}
 	int l;
 			//Check if sum is 0
