@@ -35,7 +35,8 @@ int main(){
 		int i;
  		for (i = 0; i != BLOCK_SIZE; ++i)
 			printf("%d", sum[i]);
-		printf("%c%c", DELIMITER, DELIMITER);
+		if (!global_terminate)
+			printf("%c%c", DELIMITER, DELIMITER);
 		free(sum);
 	}
 }
