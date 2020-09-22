@@ -26,21 +26,11 @@ int main()
 	{
 			convertToBinary(c);
 			counter++;
-			if(counter%3==0)
+			if(counter%35==0)
 			{
 				printf("||");
 				counter=0;
 			}
-	}
-	while(counter%3!=0)
-	{
-		c=0;
-		convertToBinary(c);
-		counter++;
-		if(counter%3==0)
-		{
-			printf("||");
-		}
 	}
 	return 0;
 }
