@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAXLEN 100
+#define MAXLEN 400
 
 int getInt(char c) { return c - 49; }
 
 int *biM(int in[], int len) {
   int *out = (int *)malloc(sizeof(int) * len);
   int ind = 0;
+  char delim = '|';
   for (size_t i = 0; i < len; i++) {
     size_t j = i * 2, k = i * 2 + 1;
     // printf("%i, %i\n", in[j], in[k]);
-    if (in[j] == in[k]) {
+    if (in[j] == delim) {
+      continue;
+    } else if (in[j] == in[k]) {
       out[ind] = 0;
     } else {
       out[ind] = 1;

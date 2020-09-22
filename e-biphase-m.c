@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAXLEN 100
+#define MAXLEN 400
 
 int getInt(char c) { return c - 49; }
 
