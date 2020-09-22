@@ -52,7 +52,7 @@ bit_t *checksum_check(int size){
 int main(){
 	while (!global_terminate_check){
 		bit_t *sum = checksum_check(BLOCK_SIZE);
-		if (sum != NULL){
+		if (sum != NULL && !global_terminate_check){
 			printf("%c%c", DELIMITER, DELIMITER);
 			//free(sum);
 		}
