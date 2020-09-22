@@ -25,9 +25,14 @@ int main(){
 			}
 			i++;
 		}
-		strcat(data, delim); //concatenates "||" to end of data
-		strcat(dataAll, data); //concatenates this data to whole data set
 		frame = strtok(NULL, delim);
+		if(frame!=NULL){ //to check whether input hasn't reached end
+			strcat(data, delim); //concatenates "||" to end of data
+			strcat(dataAll, data); //concatenates this data to whole data set
+		}
+		else{ //to check whether input reached end
+			strcat(dataAll, data); //concatenates this data to whole data set
+		}
 	}
 	
 	
