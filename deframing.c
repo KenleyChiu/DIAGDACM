@@ -12,7 +12,7 @@ int main(){
 	
 	char *frame = strtok(input, delim);
 	
-	printf("\n");
+//	printf("\n");
 	while(frame!=NULL){
 		int len = strlen(frame), i=0;
 		char data[300] = "";
@@ -37,7 +37,7 @@ int main(){
 	
 	
 	//printf("Data and checksum: ");
-	printf("\n");
+//	printf("\n");
 	printf("%s\n", dataAll); //display data appended with checksum
 	
 	
