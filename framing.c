@@ -6,43 +6,47 @@
 int main(){
     //variable declarations
 char data[max]="", frame[max] = "", startbit[]="0", stopbit[]="1", copystr[max]="", delimiter[]="||";
-int length, above288=1,startloc=0,endloc=0,dataloc=0;
+int length, dataloc=0, counter=0, i=0;
 //288 bits = 36 bytes
 scanf("%s",&data); //gets data from checksum
 length=strlen(data);
+int lastcheck=length;
 
-while(above288){ //loops until length is less than 290
-    if(length>290){ //compares 290 to account for 2 delimiter characters
-            memset(copystr,0,sizeof(copystr)); //resets copystr
-            strcat(frame,startbit); //adds start bit
-            memcpy(copystr,&data[dataloc],288); //copies 288 bits of data
-            strcat(frame,copystr);  //adds the 288 bits of data
-            strcat(frame,stopbit); //adds stop bit
-            strcat(frame,delimiter);
-            dataloc+=290; //shifts the index of the data to be copied
-            length-=290; //reduces length for if comparison
-           // printf("copystr: %s \n",copystr);
+
+for(i=0;i<length;i++){ //handles every frame except the last
+
+        if(data[i]!='|'){ //iterates counter until delimiter is foumd
+        counter++; //counts number of bits before a delimiter
+        }
+
+        else{
+        memset(copystr,0,sizeof(copystr)); //resets copystr
+        strcat(frame,startbit); //adds start bit
+        memcpy(copystr,&data[dataloc],counter); //copies bits of data found before delimiter
+        strcat(frame,copystr);  //adds the copied data
+        strcat(frame,stopbit); //adds stop bit
+        strcat(frame,delimiter); //adds delimiter
+            dataloc=i+2; //+2 to skip delimiter indices
+            counter=0; //resets counter
+            i++; //iterates one more to skip delimeter
+
+        }
+
     }
-    else {
+
+if(lastcheck!=0){ //appends the last frame that the for loop doesn't account for
             memset(copystr,0,sizeof(copystr));
-          //  printf("copystr before else: %s \n",copystr);
             strcat(frame,startbit);
-            memcpy(copystr,&data[dataloc],length);
-            strcat(frame,copystr);
-            strcat(frame,stopbit);
-            //strcat(frame,delimiter);
-
-        //    printf("copystr: %s \n",copystr);
-            break;
-    }
+            memcpy(copystr,&data[dataloc],lastcheck); //copies the remaining bits after the last delimeter
+            strcat(frame,copystr);                    //memcpy only copies until the last index
+            strcat(frame,stopbit);                    //lastcheck = length to make sure that memcpy will reach end of data
 }
-//10010101101011010010101010010111||011
-//10010101101011010010101010010111011
-//10010101101011010010101010010111||01110010101101011010010101010010||10010101101011010010101010010111||0101
-//memcpy(frame,&data[3],5);
+
+
+
+
 printf("%s\n",frame);
-//char sample[]="sample";
-//printf("%s",frame);
+
 
 }
 
